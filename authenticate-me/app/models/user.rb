@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..255 }, allow_nil: true
 
   def self.find_by_credentials(credentials, password)
-
+#validation checker extra work
     if URI::MailTo::EMAIL_REGEXP.match?(credentials)
       user = User.find_by(email: credentials)
     else
@@ -34,16 +34,22 @@ class User < ApplicationRecord
   end 
   
   def reset_session_token!
-    self.session_token = generate_unique_session_token
-    self.save!
+    self.update!(session_token: generate_unique_session_token)
     self.session_token
+    # self.session_token = generate_unique_session_token
+    # self.save!
+    # self.session_token
   end 
   
   private
   def generate_unique_session_token
-    while true
-      token = SecureRandom::urlsafe_base64
-      return token unless User.exists?(session_token: token)
+    loop do
+      token = SecureRandom.base64
+      break token unless User.exists?(session_token: token)
     end 
+    # while true
+    #   token = SecureRandom::urlsafe_base64
+    #   return token unless User.exists?(session_token: token)
+    # end 
   end 
 end

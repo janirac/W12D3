@@ -4,12 +4,14 @@ class ApplicationController < ActionController::API
 
     def current_user
         @current_user ||= User.find_by(session_token: session[:session_token])# user whose `session_token` == token in `session` cookie
-      end
+    end
       
       def login!(user)
+        # debugger
         # reset `user`'s `session_token` and store in `session` cookie
         session[:session_token] = user.reset_session_token! 
         @current_user = user
+        debugger
       end
       
       def logout!
@@ -35,6 +37,7 @@ class ApplicationController < ActionController::API
         if current_user
           render json: { user: current_user.slice('id', 'username', 'session_token') }
         else
+          # debugger
           render json: ['No current user']
         end
       end
