@@ -17,7 +17,7 @@ class Api::SessionsController < ApplicationController
 
       @user = User.find_by_credentials(credentials, password)
 
-      if @user 
+      if @user.save
          login!(@user)
          render 'api/users/show'
       else 
