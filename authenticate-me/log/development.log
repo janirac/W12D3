@@ -1562,3 +1562,70 @@ NameError - undefined local variable or method `banana' for #<Api::SessionsContr
 Completed 500 Internal Server Error in 18ms (Views: 2.2ms | ActiveRecord: 0.0ms | Allocations: 4275)
 
 
+Started GET "/api/session" for 172.31.160.1 at 2023-02-02 10:56:34 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 18ms (Views: 0.3ms | ActiveRecord: 3.2ms | Allocations: 5035)
+
+
+Started GET "/cart.json" for 172.31.160.1 at 2023-02-02 10:56:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/cart.json"):
+  
+Started GET "/favicon.ico" for 172.31.160.1 at 2023-02-02 10:56:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/api/test?login" for 172.31.160.1 at 2023-02-02 10:57:15 -0500
+Processing by ApplicationController#test as */*
+  Parameters: {"login"=>nil}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 821)
+
+
+Started POST "/api/test?login" for 172.31.160.1 at 2023-02-02 10:57:30 -0500
+Processing by ApplicationController#test as */*
+  Parameters: {"login"=>nil, "application"=>{}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 580)
+
+
+Started GET "/cart.json" for 172.31.160.1 at 2023-02-02 10:59:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/cart.json"):
+  
+Started GET "/cart.json" for 172.31.160.1 at 2023-02-02 10:59:49 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/cart.json"):
+  
+Started POST "/api/test?login" for 172.31.160.1 at 2023-02-02 10:59:51 -0500
+Processing by ApplicationController#test as */*
+  Parameters: {"login"=>nil, "application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:41:in `test'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:48:in `block in generate_unique_session_token'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:37:in `reset_session_token!'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "Demo-lition"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:37:in `reset_session_token!'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:37:in `reset_session_token!'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:37:in `reset_session_token!'
+  [1m[36mUser Update (0.7ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-02-02 15:59:51.300377"], ["id", 1]]
+  ↳ app/models/user.rb:37:in `reset_session_token!'
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:37:in `reset_session_token!'
+Completed 200 OK in 108039ms (Views: 0.5ms | ActiveRecord: 9.8ms | Allocations: 93161)
+
+
+Started POST "/api/test?login!" for 172.31.160.1 at 2023-02-02 11:01:39 -0500
+Processing by ApplicationController#test as */*
+  Parameters: {"login!"=>nil}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 633)
+
+
